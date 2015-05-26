@@ -5,8 +5,8 @@ object Level2Tests {
 
   def allFibTest() = {
     Assert.areEqual(
-      Level2Code.allFib(0, 1).take(20).mkString(","),
-      "0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181")
+      "0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181",
+      Level2Code.allFib(0, 1).take(20).mkString(","))
   }
 
   def firstNFibonacciNumbersTest() = {
