@@ -25,6 +25,38 @@ object Level3Code {
   //
   //The next morning, they all separate the remaining pile and there are no coconuts left for the monkey.
   //How many coconuts did they have in the pile the night before?
-  def monkeysAndCoconuts(sailors: Int): Int = ???
+  def monkeysAndCoconuts(sailors: Int): Int = {
 
+    def calcShare(pile: Int) = pile / sailors
+    
+    def getRemaining(pile: Int, sailors: Int) = {
+      val share = calcShare(pile)
+      pile - share - 1 // take mine and give one to monkey
+    }
+    
+    def playTheGame(pile: Int, turn: Int): Int = {
+
+      if (turn > sailors) //turns are up
+        pile
+      else if (pile % sailors != 1) //!= 1 for the monkey
+        0
+      else {
+        val remaining = getRemaining(pile, sailors)
+
+        playTheGame(remaining, turn + 1)
+      }
+    }
+    
+    def testCase(pile: Int): Int = {
+
+      val remaining = playTheGame(pile, 1)
+
+      if (remaining > 0 && remaining % sailors == 0)
+        pile
+      else
+        testCase(pile + 1)
+    }
+    
+    testCase(0)
+  }
 }
