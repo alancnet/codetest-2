@@ -12,7 +12,33 @@ object Level3Code {
   // To solve: each number 1-9 must exist exactly 9 times, and never in the same row or same column as its self
   // The only valid values are 1-9
   // The more elegant the approach the better
-  def solveSudoku(sudokuBoard: Array[Int]): Array[Int] = ???
+  def solveSudoku(sudokuBoard: Array[Int]): Array[Int] = {
+
+    val n = 9
+    val s = Math.sqrt(n).toInt
+    type Board = IndexedSeq[Array[Int]]
+
+    def solve(board: Board, cell: Int = 0): Option[Board] = (cell % n, cell / n) match {
+      case (r, `n`)                  => Some(board)
+      case (r, c) if board(r)(c) > 0 => solve(board, cell + 1)
+      case (r, c) =>
+        def cells(i: Int) = Seq(board(r)(i), board(i)(c), board(s * (r / s) + i / s)(s * (c / s) + i % s))
+
+        def guess(x: Int) = solve(board.updated(r, board(r).updated(c, x)), cell + 1)
+
+        1 to n diff (board.indices flatMap cells) collectFirst Function.unlift(guess)
+    }
+
+    def getBoard() = {
+      for (i <- 1 to 9) yield {
+        val upper = i * 9
+        sudokuBoard.slice(upper - 9, upper)
+      }
+    }
+    val board = getBoard()
+
+    solve(board).get.flatten.toArray
+  }
 
   //Monkeys and Coconuts https://youtu.be/U9qU20VmvaU?t=43s
   //
@@ -28,12 +54,12 @@ object Level3Code {
   def monkeysAndCoconuts(sailors: Int): Int = {
 
     def calcShare(pile: Int) = pile / sailors
-    
+
     def getRemaining(pile: Int, sailors: Int) = {
       val share = calcShare(pile)
       pile - share - 1 // take mine and give one to monkey
     }
-    
+
     def playTheGame(pile: Int, turn: Int): Int = {
 
       if (turn > sailors) //turns are up
@@ -46,7 +72,7 @@ object Level3Code {
         playTheGame(remaining, turn + 1)
       }
     }
-    
+
     def testCase(pile: Int): Int = {
 
       val remaining = playTheGame(pile, 1)
@@ -56,7 +82,7 @@ object Level3Code {
       else
         testCase(pile + 1)
     }
-    
+
     testCase(0)
   }
 }
