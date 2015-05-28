@@ -55,17 +55,17 @@ var level1tests = {
     squareAllTest: function () {
         var expected = [1, 4, 9, 16, 25];
         var actual = code.squareAll([1, 2, 3, 4, 5]);
-        assertEqualArrays(expected, actual);
+        this.assertEqualArrays(expected, actual);
     },
     cubeAllTest: function () {
         var expected = [1, 8, 27, 64, 125];
         var actual = code.cubeAll([1, 2, 3, 4, 5]);
-        assertEqualArrays(expected, actual);
+        this.assertEqualArrays(expected, actual);
     },
     productAllTest: function () {
         var expected = [2, 6, 12, 20, 30];
         var actual = code.productAll([1, 2, 3, 4, 5], [2, 3, 4, 5, 6]);
-        assertEqualArrays(expected, actual);
+        this.assertEqualArrays(expected, actual);
     },
     sumAllTest: function () {
         var actual = code.sumAll([1, 9, 2, 8, 3, 7, 4, 6, 5, 5, 50]);
@@ -74,7 +74,7 @@ var level1tests = {
     reverseTest: function () {
         var expected = [1, 5, 1, 2, 1, 9, 1, 3];
         var actual = code.reverse([3, 1, 9, 1, 2, 1, 5, 1]);
-        assertEqualArrays(expected, actual);
+        this.assertEqualArrays(expected, actual);
     },
     linkedListMinTest: function () {
 
