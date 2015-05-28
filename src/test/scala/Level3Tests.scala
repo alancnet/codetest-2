@@ -1,6 +1,15 @@
 
 object Level3Tests {
-
+  
+  @Rank(1)
+  def monkeysAndCoconutsTest() = {
+    val sailors = 5
+    val actualCoconuts = Level3Code.monkeysAndCoconuts(sailors)
+    val expectedCoconuts = 3121
+    Assert.areEqual(expectedCoconuts, actualCoconuts)
+  }
+  
+  @Rank(2)
   def solveSudokuTest() = {
     def sudokuToString(board: Array[Int]): String = {
       var length = Stream.from(2).filter(x => x * x >= board.length).head
@@ -88,10 +97,4 @@ object Level3Tests {
       0, 1, 0, 4, 3, 6, 0, 5, 0), doesBoardSolve)
   }
 
-  def monkeysAndCoconutsTest() = {
-    val sailors = 5
-    val actualCoconuts = Level3Code.monkeysAndCoconuts(sailors)
-    val expectedCoconuts = 3121
-    Assert.areEqual(expectedCoconuts, actualCoconuts)
-  }
 }

@@ -1,4 +1,3 @@
-
 object Main {
 
   def test(m: java.lang.reflect.Method, o: java.lang.Object) {
@@ -17,12 +16,18 @@ object Main {
     println("\nScala Tests:");
 
     val tests = Array(Level1Tests, Level2Tests, Level3Tests)
-    
+
     tests.foreach { o =>
       o
         .getClass
         .getMethods
-        .sortWith(_.getName < _.getName)
+        .sortWith((m1, m2) => {
+          val r1 = m1.getAnnotation(classOf[Rank])
+          val r2 = m2.getAnnotation(classOf[Rank])
+          if (r1 != null && r2 != null)
+            r1.value < r2.value
+          else false
+        })
         .filter(m => m.getName.endsWith("Test"))
         .map(m => {
           test(m, o);

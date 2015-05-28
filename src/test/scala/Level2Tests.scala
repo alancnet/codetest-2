@@ -3,12 +3,14 @@ import scala.collection.immutable.Stream.consWrapper
 
 object Level2Tests {
 
+  @Rank(1)
   def allFibTest() = {
     Assert.areEqual(
       "0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181",
       Level2Code.allFib(0, 1).take(20).mkString(","))
   }
 
+  @Rank(2)
   def firstNFibonacciNumbersTest() = {
     def assertFirstNFib(n: Int, expected: Stream[Int]) = {
       val actual = Level2Code.firstNFibonacciNumbers(n).toList;
@@ -19,6 +21,7 @@ object Level2Tests {
     assertFirstNFib(9, Stream(0, 1, 1, 2, 3, 5, 8, 13, 21))
   }
 
+  @Rank(3)
   def isFibTest() = {
     def assertNisFib(n: Int, is: Boolean) = Assert.isTrue(Level2Code.isFibNumber(n) == is, f"Is $n a fib? $is; But you had ${!is}")
     assertNisFib(0, true)
@@ -33,6 +36,7 @@ object Level2Tests {
     assertNisFib(9, false)
   }
 
+  @Rank(4)
   def sumSomeFibTest() = {
     def assertSumSomeFib(lower: Int, upper: Int, expected: Int) = {
       val actual = Level2Code.sumSomeFib(lower, upper);
@@ -45,6 +49,7 @@ object Level2Tests {
     assertSumSomeFib(0, 500, 986)
   }
 
+  @Rank(5)
   def parallelSumTest() = {
     val source1 = List.range(10, 10000).par
     val actual = Level2Code.parallelSum(source1)
@@ -52,6 +57,7 @@ object Level2Tests {
     Assert.isTrue(actual == expected, f"expected $expected but got $actual")
   }
 
+  @Rank(6)
   def isTextInStreamTest() = {
     def stringToStream(text: String, chunkSize: Int): Stream[String] = {
       if (text == null || text.length() == 0)

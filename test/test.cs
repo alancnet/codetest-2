@@ -17,10 +17,12 @@ namespace test
             if (EnableScala)
             {
                 var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
-                var test = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar " + main + " " + test));
-                if (File.Exists("../bin/scala.jar"))
-                    results.AddRange(Exec("../bin", "%SCALAEXE%", "-cp scala.jar Main"));
+                var testScala = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
+                var testJava = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/java")).EnumerateFiles().Select(x=> x.FullName));
+                var targetClasses = new System.IO.DirectoryInfo("../target/classes").FullName;
+                results.AddRange(Exec("..", "%SCALAC%", String.Format("-nowarn -d {0} {1} {2} {3}", targetClasses, main, testScala, testJava)));
+                results.AddRange(Exec("..", "%JAVAC%", String.Format("-nowarn -cp {0} -d {0} {1}", targetClasses, testJava)));
+        		results.AddRange(Exec("../bin", "%SCALAEXE%", String.Format("-cp {0} Main", targetClasses)));
             }
             return results;
         }
