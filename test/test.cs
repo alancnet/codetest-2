@@ -16,9 +16,11 @@ namespace test
             List<Result> results = new List<Result>();
             if (EnableScala)
             {
-                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar src\\main\\scala\\* src\\test\\scala\\*"));
+                var main = String.Join(" ",(new System.IO.DirectoryInfo("../src/main/scala")).EnumerateFiles().Select(x=> x.FullName));
+                var test = String.Join(" ",(new System.IO.DirectoryInfo("../src/test/scala")).EnumerateFiles().Select(x=> x.FullName));
+                results.AddRange(Exec("..", "%SCALAC%", "-nowarn -d bin/scala.jar " + main + " " + test));
                 if (File.Exists("../bin/scala.jar"))
-                    results.AddRange(Exec("..\\bin", "%SCALAEXE%", "-cp scala.jar Main"));
+                    results.AddRange(Exec("../bin", "%SCALAEXE%", "-cp scala.jar Main"));
             }
             return results;
         }
