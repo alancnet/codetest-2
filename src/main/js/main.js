@@ -2,6 +2,8 @@ var level1code = require('./level1code.js');
 var level1tests = require('../../test/js/level1tests.js');
 var level2code = require('./level2code.js');
 var level2tests = require('../../test/js/level2tests.js');
+var level3code = require('./level3code.js');
+var level3tests = require('../../test/js/level3tests.js');
 function Program() {
 
     function test(t, name) {
@@ -27,6 +29,7 @@ function Program() {
 
         run(level1tests);
         run(level2tests);
+        run(level3tests);
 
         console.log("Done!");
     }
