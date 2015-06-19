@@ -17,14 +17,7 @@ object Level2Code {
   // This function should sum all of the values in the input sequence in parallel way to
   // take advantage of multiple cores
   // This function is broken. Fix it so it always returns the correct result.
-  def parallelSum(list: scala.collection.parallel.ParSeq[Int]): Int = {
-    var accumulator = 0
-    list.map(x => {
-      accumulator += x;
-      x
-    })
-    return accumulator
-  }
+  def parallelSum(list: scala.collection.parallel.ParSeq[Int]): Int = ???
 
   // Determine if the text occurs somewhere in the stream.
   // Code as if the stream was accessing a very large file that would not fit in memory.
