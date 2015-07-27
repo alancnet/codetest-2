@@ -1,6 +1,5 @@
-
 object Level1Tests {
-  
+
   @Rank(1)
   def helloWorldTest() {
     Assert.areEqual("Hello World!", Level1Code.helloWorld());

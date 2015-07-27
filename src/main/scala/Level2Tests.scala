@@ -1,6 +1,3 @@
-import scala.Stream
-import scala.collection.immutable.Stream.consWrapper
-
 object Level2Tests {
 
   @Rank(1)
