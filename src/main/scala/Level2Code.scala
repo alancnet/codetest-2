@@ -1,6 +1,16 @@
 
 object Level2Code {
 
+  // ** Do not use a built in function **
+  // Demonstrate an algorithm for finding the Golden Ratio
+  // Given two numbers a and b with a > b > 0, the ratio is b / a
+  // let c = a + b, then the ratio c / b is closer to the golden ratio
+  // let d = b + c, then the ratio d / c is closer to the golden ratio
+  // let e = c + d, then the ratio e / d is closer to the golden ratio
+  // if you continue this process, the result will trend towards the golden ratio
+  def goldenRatio(a:Double, b:Double) : Double = ???
+
+
   // An endless stream of Fibonacci numbers. Hint: current #:: ???
   def allFib(current: Int, next: Int): Stream[Int] = ???
 
