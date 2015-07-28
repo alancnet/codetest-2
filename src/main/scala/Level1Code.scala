@@ -2,7 +2,7 @@
 object Level1Code {
 
   // Returns "Hello World!"
-  def helloWorld(): String = "Hello World!"
+  def helloWorld(): String = ???
 
   // Return the sum of two numbers
   def sum(a:Int, b:Int): Int = ???
